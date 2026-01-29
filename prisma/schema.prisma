@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  isBanned  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tutorProfile TutorProfile?
+  bookings     Booking[]     @relation("StudentBookings")
+  reviews      Review[]
+}
+
+model TutorProfile {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  bio          String?
+  pricePerHour Int
+  rating       Float    @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user         User           @relation(fields: [userId], references: [id])
+  categories   Category[]
+  availability Availability[]
+  bookings     Booking[]      @relation("TutorBookings")
+  reviews      Review[]
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
+  tutors TutorProfile[]
+}
+
+model Availability {
+  id        String   @id @default(uuid())
+  tutorId   String
+  date      DateTime
+  startTime DateTime
+  endTime   DateTime
+  isBooked  Boolean  @default(false)
+
+  tutor    TutorProfile @relation(fields: [tutorId], references: [id])
+  bookings Booking[]    @relation("AvailabilityBookings") // back-relation for Booking
+
+  @@unique([tutorId, date, startTime])
+}
+
+model Booking {
+  id             String        @id @default(uuid())
+  studentId      String
+  tutorId        String
+  availabilityId String
+  status         BookingStatus @default(CONFIRMED)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  student      User         @relation("StudentBookings", fields: [studentId], references: [id])
+  tutor        TutorProfile @relation("TutorBookings", fields: [tutorId], references: [id])
+  availability Availability @relation("AvailabilityBookings", fields: [availabilityId], references: [id])
+  review       Review?
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int
+  comment   String
+  studentId String
+  tutorId   String
+  bookingId String   @unique
+  createdAt DateTime @default(now())
+
+  student User         @relation(fields: [studentId], references: [id])
+  tutor   TutorProfile @relation(fields: [tutorId], references: [id])
+  booking Booking      @relation(fields: [bookingId], references: [id])
+}
+
+enum Role {
+  STUDENT
+  TUTOR
+  ADMIN
+  
+}
+
+enum BookingStatus {
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
