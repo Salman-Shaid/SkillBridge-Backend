@@ -15,18 +15,18 @@ router.get(
   adminController.getAdminDashboard
 );
 
-// ===========================
+
 // Users management (protected)
-// ===========================
+
 router.get("/users", authMiddleware, roleMiddleware("ADMIN"), adminController.getAllUsers);
 router.get("/users/:id", authMiddleware, roleMiddleware("ADMIN"), adminController.getUserById);
 router.delete("/users/:id", authMiddleware, roleMiddleware("ADMIN"), adminController.deleteUser);
 // Update user status
 router.patch("/users/:id", authMiddleware, roleMiddleware("ADMIN"), adminController.updateUserStatus);
 
-// ===========================
+
 // Tutors management (protected)
-// ===========================
+
 router.get("/tutors", authMiddleware, roleMiddleware("ADMIN"), adminController.getAllTutors);
 router.get("/tutors/:id", authMiddleware, roleMiddleware("ADMIN"), adminController.getTutorById);
 router.delete("/tutors/:id", authMiddleware, roleMiddleware("ADMIN"), adminController.deleteTutor);
