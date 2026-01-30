@@ -2,7 +2,7 @@ import { Response } from "express";
 import { AuthRequest } from "../../middlewares/auth.middleware";
 import prisma from "../../lib/prisma";
 
-// Student Dashboard
+
 export const studentDashboard = async (req: AuthRequest, res: Response) => {
     if (!req.user || req.user.role !== "STUDENT") {
         return res.status(403).json({ message: "Forbidden" });
@@ -23,7 +23,7 @@ export const studentDashboard = async (req: AuthRequest, res: Response) => {
     res.json({ success: true, bookings });
 };
 
-// Tutor Dashboard
+
 export const getTutorDashboard = async (req: AuthRequest, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ message: "Unauthorized" });
@@ -49,9 +49,7 @@ export const getTutorDashboard = async (req: AuthRequest, res: Response) => {
 };
 
 
-// ===============================
-// Admin Dashboard
-// ===============================
+
 export const adminDashboard = async (req: any, res: Response) => {
   try {
     const totalUsers = await prisma.user.count();

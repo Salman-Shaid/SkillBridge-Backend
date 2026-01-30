@@ -9,13 +9,13 @@ import {
 
 const router = Router();
 
-// Student dashboard
+
 router.get("/student", authMiddleware, studentDashboard);
 
-// Tutor dashboard
+
 router.get("/tutor", authMiddleware, roleMiddleware("TUTOR"), getTutorDashboard);
 
-// Admin dashboard
+
 router.get("/admin", authMiddleware, roleMiddleware("ADMIN"), adminDashboard);
 
 export default router;
