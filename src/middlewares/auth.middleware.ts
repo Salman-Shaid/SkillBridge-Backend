@@ -2,14 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma";
 
-// JWT Payload type
+
 export interface JwtPayload {
   id: string;
   email: string;
   role: "STUDENT" | "TUTOR" | "ADMIN";
 }
 
-// Extend Request type
+
 export interface AuthRequest extends Request {
   user?: {
     id: string;
@@ -33,7 +33,7 @@ export const authMiddleware = async (
     const token = authHeader.split(" ")[1];
     const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
 
-    // Fetch full user from DB
+ 
     const user = await prisma.user.findUnique({
       where: { id: payload.id },
       select: { id: true, name: true, email: true, role: true },
@@ -43,7 +43,7 @@ export const authMiddleware = async (
       return res.status(401).json({ message: "User not found" });
     }
 
-    req.user = user; // attach to request
+    req.user = user; 
     next();
   } catch (error) {
     return res.status(401).json({ message: "Invalid token" });

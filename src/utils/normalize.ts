@@ -1,4 +1,4 @@
-// src/utils/normalize.ts
+
 export const toSingleString = (value: string | string[]): string => {
   if (Array.isArray(value)) return value[0];
   return value;
