@@ -1,9 +1,9 @@
-// src/modules/auth/auth.controller.ts
+
 import { Request, Response } from "express";
 import { asyncHandler } from "../../utils/asyncHandler";
 import { registerUser, loginUser } from "./auth.service";
 import { AuthRequest } from "../../middlewares/auth.middleware";
-// Type-safe Request Body
+
 interface RegisterBody {
   name: string;
   email: string;
@@ -23,9 +23,7 @@ export const getMe = (req: AuthRequest, res: Response) => {
 
   res.json({ success: true, user: req.user });
 };
-// =======================
-// Register Controller
-// =======================
+
 export const register = asyncHandler(async (req: Request<{}, {}, RegisterBody>, res: Response) => {
   const user = await registerUser(req.body);
   res.status(201).json({
@@ -35,9 +33,7 @@ export const register = asyncHandler(async (req: Request<{}, {}, RegisterBody>, 
   });
 });
 
-// =======================
-// Login Controller
-// =======================
+
 export const login = asyncHandler(async (req: Request<{}, {}, LoginBody>, res: Response) => {
   const { email, password } = req.body;
 
@@ -50,6 +46,6 @@ export const login = asyncHandler(async (req: Request<{}, {}, LoginBody>, res: R
   res.json({
     success: true,
     message: "Login successful",
-    data: userWithToken, // 
+    data: userWithToken,
   });
 });

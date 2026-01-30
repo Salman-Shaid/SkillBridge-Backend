@@ -4,9 +4,7 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
-// =======================
-// Register User
-// =======================
+
 export const registerUser = async (data: {
   name: string;
   email: string;
@@ -30,9 +28,7 @@ export const registerUser = async (data: {
   return user;
 };
 
-// =======================
-// Login User
-// =======================
+
 export const loginUser = async (email: string, password: string) => {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw new Error("User not found");
