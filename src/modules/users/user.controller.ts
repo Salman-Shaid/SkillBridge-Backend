@@ -5,7 +5,8 @@ import { comparePassword } from "../../utils/hash";
 import { registerSchema, loginSchema } from "./user.validation";
 import prisma  from "../../lib/prisma";
 import { AuthRequest } from "../../middlewares/auth.middleware";
-// Register a new user
+
+
 export const registerUser = async (req: Request, res: Response) => {
   try {
     const parsed = registerSchema.parse(req.body);
@@ -21,7 +22,7 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
-// Login
+
 export const loginUser = async (req: Request, res: Response) => {
   try {
     const parsed = loginSchema.parse(req.body);
@@ -38,21 +39,19 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-// Get current user info
+
 export const getMe = async (req: Request, res: Response) => {
   const user = (req as any).user;
   res.json({ user });
 };
-// ===============================
-// Student Dashboard (overview + bookings)
-// ===============================
+
 export const getStudentDashboard = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user) return res.status(401).json({ message: "Unauthorized" });
 
     const studentId = req.user.id;
 
-    // Student-এর সকল bookings
+
     const bookings = await prisma.booking.findMany({
       where: { studentId },
       include: {
@@ -73,7 +72,7 @@ export const getStudentDashboard = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// Get current profile
+
 export const getMyProfile = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user) return res.status(401).json({ message: "Unauthorized" });
@@ -89,7 +88,7 @@ export const getMyProfile = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// Update profile
+
 export const updateProfile = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user) return res.status(401).json({ message: "Unauthorized" });
