@@ -1,8 +1,5 @@
 import prisma from "../../lib/prisma";
 
-// ===============================
-// Create or Update Tutor Profile
-// ===============================
 export const createOrUpdateProfile = async (
   userId: string,
   bio: string,
@@ -20,7 +17,7 @@ export const createOrUpdateProfile = async (
         bio,
         pricePerHour,
         categories: {
-          set: categoryIds.map((id) => ({ id })), // replace old categories
+          set: categoryIds.map((id) => ({ id })), 
         },
       },
       include: {
@@ -52,9 +49,7 @@ export const createOrUpdateProfile = async (
   });
 };
 
-// ===============================
-// Get Tutor Profile by User ID
-// ===============================
+
 export const getTutorProfileByUserId = async (userId: string) => {
   return prisma.tutorProfile.findUnique({
     where: { userId },
@@ -83,9 +78,7 @@ export const addAvailability = async (
     },
   });
 };
-// ===============================
-// Get All Tutors
-// ===============================
+
 export const getAllTutors = async () => {
   return prisma.tutorProfile.findMany({
     include: {
