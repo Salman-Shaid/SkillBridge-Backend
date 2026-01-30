@@ -1,16 +1,13 @@
-// src/modules/bookings/booking.service.ts
+
 import prisma from "../../lib/prisma";
 import { BookingStatus } from "./booking.enum";
 
-// ===============================
-// Create Booking
-// ===============================
 export const createBooking = async (
   studentId: string,
   tutorId: string,
   availabilityId: string
 ) => {
-  // Availability check
+
   const slot = await prisma.availability.findUnique({
     where: { id: availabilityId },
   });
@@ -18,7 +15,7 @@ export const createBooking = async (
   if (!slot) throw new Error("Availability slot not found");
   if (slot.isBooked) throw new Error("This slot is already booked");
 
-  // Create booking
+
   const booking = await prisma.booking.create({
     data: {
       studentId,
@@ -28,7 +25,7 @@ export const createBooking = async (
     },
   });
 
-  // Mark availability as booked
+
   await prisma.availability.update({
     where: { id: availabilityId },
     data: { isBooked: true },
@@ -38,9 +35,6 @@ export const createBooking = async (
 };
 
 
-// ===============================
-// Get All Bookings
-// ===============================
 export const getAllBookings = async () => {
   return await prisma.booking.findMany({
     include: {
@@ -55,9 +49,6 @@ export const getAllBookings = async () => {
   });
 };
 
-// ===============================
-// Get Booking By ID
-// ===============================
 export const getBookingById = async (id: string) => {
   return await prisma.booking.findUnique({
     where: { id },
@@ -72,9 +63,7 @@ export const getBookingById = async (id: string) => {
   });
 };
 
-// ===============================
-// Update Booking Status
-// ===============================
+
 export const updateBooking = async (id: string, status: BookingStatus) => {
   return await prisma.booking.update({
     where: { id },
@@ -82,9 +71,7 @@ export const updateBooking = async (id: string, status: BookingStatus) => {
   });
 };
 
-// ===============================
-// Delete Booking
-// ===============================
+
 export const deleteBooking = async (id: string) => {
   return await prisma.booking.delete({
     where: { id },

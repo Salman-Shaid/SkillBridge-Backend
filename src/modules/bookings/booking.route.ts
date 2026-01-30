@@ -7,7 +7,7 @@ import { createBookingSchema, updateBookingSchema, bookingIdSchema } from "./boo
 
 const router = express.Router();
 
-// ✅ Create booking → only STUDENT
+
 router.post(
   "/",
   authMiddleware,
@@ -16,7 +16,7 @@ router.post(
   bookingController.createBooking
 );
 
-// ✅ Get all bookings → ADMIN or tutor
+
 router.get(
   "/",
   authMiddleware,
@@ -24,7 +24,7 @@ router.get(
   bookingController.getAllBookings
 );
 
-// ✅ Get booking by ID → ADMIN, STUDENT, or tutor
+
 router.get(
   "/:id",
   authMiddleware,
@@ -33,7 +33,7 @@ router.get(
   bookingController.getBookingById
 );
 
-// ✅ Update booking status → only ADMIN or tutor
+
 router.put(
   "/:id",
   authMiddleware,
@@ -42,7 +42,7 @@ router.put(
   bookingController.updateBooking
 );
 
-// ✅ Delete booking → only ADMIN
+
 router.delete(
   "/:id",
   authMiddleware,

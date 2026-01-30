@@ -1,10 +1,10 @@
-// src/modules/bookings/booking.controller.ts
+
 import { Request, Response } from "express";
 import * as bookingService from "./booking.service";
 
 export const createBooking = async (req: any, res: Response) => {
   try {
-    const studentId = req.user.id; // ✅ JWT থেকে studentId
+    const studentId = req.user.id;
     const { tutorId, availabilityId } = req.body;
 
     const booking = await bookingService.createBooking(
@@ -20,7 +20,7 @@ export const createBooking = async (req: any, res: Response) => {
 };
 
 
-// Get All Bookings
+
 export const getAllBookings = async (_req: Request, res: Response) => {
   try {
     const bookings = await bookingService.getAllBookings();
@@ -31,7 +31,7 @@ export const getAllBookings = async (_req: Request, res: Response) => {
 };
 
 
-// Get Booking By ID
+
 export const getBookingById = async (req: Request, res: Response) => {
   try {
     let id = req.params.id;
@@ -45,7 +45,7 @@ export const getBookingById = async (req: Request, res: Response) => {
 };
 
 
-// Update Booking
+
 export const updateBooking = async (req: Request, res: Response) => {
   try {
     let id = req.params.id;
@@ -62,7 +62,7 @@ export const updateBooking = async (req: Request, res: Response) => {
 };
 
 
-// Delete Booking
+
 export const deleteBooking = async (req: Request, res: Response) => {
   try {
     let id = req.params.id;
