@@ -1,4 +1,4 @@
-// src/modules/categories/category.validation.ts
+
 import { z } from "zod";
 
 export const createCategorySchema = z.object({
@@ -13,7 +13,7 @@ export const categoryIdSchema = z.object({
   id: z.string().uuid("Invalid category id"),
 });
 
-// Middleware to validate
+
 export const validate = (schema: any) => (req: any, res: any, next: any) => {
   try {
     const body = req.body;

@@ -1,9 +1,9 @@
-// src/modules/categories/category.controller.ts
+
 import { Request, Response } from "express";
 import * as categoryService from "./category.service";
 import { validate, createCategorySchema, updateCategorySchema, categoryIdSchema } from "./category.validation";
 
-// Create category
+
 export const createCategory = [
   validate(createCategorySchema),
   async (req: Request, res: Response) => {
@@ -17,7 +17,7 @@ export const createCategory = [
   }
 ];
 
-// Get all categories
+
 export const getAllCategories = async (req: Request, res: Response) => {
   try {
     const categories = await categoryService.getAllCategories();
@@ -27,7 +27,7 @@ export const getAllCategories = async (req: Request, res: Response) => {
   }
 };
 
-// Get category by ID
+
 export const getCategoryById = [
   validate(categoryIdSchema),
   async (req: Request, res: Response) => {
@@ -41,7 +41,7 @@ export const getCategoryById = [
   }
 ];
 
-// Update category
+
 export const updateCategory = [
   validate(updateCategorySchema),
   async (req: Request, res: Response) => {
@@ -56,7 +56,7 @@ export const updateCategory = [
   }
 ];
 
-// Delete category
+
 export const deleteCategory = [
   validate(categoryIdSchema),
   async (req: Request, res: Response) => {

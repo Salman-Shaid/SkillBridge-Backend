@@ -1,7 +1,5 @@
-// src/modules/bookings/booking.validation.ts
 import { z } from "zod";
 
-// ✅ Create Booking (studentId comes from JWT)
 export const createBookingSchema = z.object({
   body: z.object({
     tutorId: z.string().uuid(),
@@ -9,7 +7,7 @@ export const createBookingSchema = z.object({
   }),
 });
 
-// Update Booking (status only)
+
 export const updateBookingSchema = z.object({
   body: z.object({
     status: z.enum(["CONFIRMED", "COMPLETED", "CANCELLED"]),
@@ -19,7 +17,7 @@ export const updateBookingSchema = z.object({
   }),
 });
 
-// Booking ID validation for get/delete
+
 export const bookingIdSchema = z.object({
   params: z.object({
     id: z.string().uuid(),
