@@ -2,9 +2,7 @@
 import { Request, Response } from "express";
 import * as adminService from "./admin.service";
 import prisma from "../../lib/prisma";
-// ===========================
-// Users
-// ===========================
+
 export const getAllUsers = async (_req: Request, res: Response) => {
   try {
     const users = await adminService.getAllUsers();
@@ -25,9 +23,7 @@ export const getUserById = async (req: Request, res: Response) => {
     res.status(400).json({ message: err.message });
   }
 };
-// Update user status (isActive)
-// Update user status
-// src/modules/admin/admin.controller.ts
+
 export const updateUserStatus = async (req: Request, res: Response) => {
   try {
     const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
@@ -51,9 +47,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-// ===========================
-// Tutors
-// ===========================
+
 export const getAllTutors = async (_req: Request, res: Response) => {
   try {
     const tutors = await adminService.getAllTutors();
@@ -83,9 +77,6 @@ export const deleteTutor = async (req: Request, res: Response) => {
   }
 };
 
-// ===========================
-// Bookings
-// ===========================
 export const getAllBookings = async (_req: Request, res: Response) => {
   try {
     const bookings = await adminService.getAllBookings();
@@ -115,9 +106,7 @@ export const deleteBooking = async (req: Request, res: Response) => {
   }
 };
 
-// ===========================
-// Reviews
-// ===========================
+
 export const getAllReviews = async (_req: Request, res: Response) => {
   try {
     const reviews = await adminService.getAllReviews();
@@ -147,9 +136,7 @@ export const deleteReview = async (req: Request, res: Response) => {
   }
 };
 
-// ===========================
-// Categories
-// ===========================
+
 export const getAllCategories = async (_req: Request, res: Response) => {
   try {
     const categories = await adminService.getAllCategories();
@@ -179,12 +166,10 @@ export const deleteCategory = async (req: Request, res: Response) => {
   }
 };
 
-// ===============================
-// Admin Dashboard
-// ===============================
+
 export const getAdminDashboard = async (req: Request, res: Response) => {
   try {
-    // Total counts
+   
     const totalUsers = await prisma.user.count();
     const totalStudents = await prisma.user.count({ where: { role: "STUDENT" } });
     const totalTutors = await prisma.user.count({ where: { role: "TUTOR" } });
@@ -192,14 +177,14 @@ export const getAdminDashboard = async (req: Request, res: Response) => {
     const totalReviews = await prisma.review.count();
     const totalCategories = await prisma.category.count();
 
-    // Recent users (last 5)
+ 
     const recentUsers = await prisma.user.findMany({
       orderBy: { createdAt: "desc" },
       take: 5,
       select: { id: true, name: true, email: true, role: true },
     });
 
-    // Recent bookings (last 5)
+
     const recentBookings = await prisma.booking.findMany({
       orderBy: { createdAt: "desc" },
       take: 5,
@@ -209,7 +194,7 @@ export const getAdminDashboard = async (req: Request, res: Response) => {
       },
     });
 
-    // Format tutor name directly for convenience
+
     const formattedBookings = recentBookings.map(b => ({
       id: b.id,
       status: b.status,
