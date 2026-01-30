@@ -1,4 +1,4 @@
-import prisma from "../../lib/prisma"; // ✅ default import
+import prisma from "../../lib/prisma";
 import { hashPassword, comparePassword } from "../../utils/hash";
 
 export const createUser = async (name: string, email: string, password: string, role: string) => {

@@ -1,4 +1,4 @@
-// src/modules/admin/admin.controller.ts
+
 import { Request, Response } from "express";
 import * as adminService from "./admin.service";
 import prisma from "../../lib/prisma";

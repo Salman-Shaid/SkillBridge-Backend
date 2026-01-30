@@ -4,14 +4,16 @@ import { authMiddleware } from "../../middlewares/auth.middleware";
 
 const router = Router();
 
-// Auth routes
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
-// Protected routes
+
 router.get("/me", authMiddleware, getMe);
-router.get("/dashboard", authMiddleware, getStudentDashboard); // Student dashboard overview
-router.get("/profile", authMiddleware, getMyProfile);           // Get current profile
-router.put("/update-profile", authMiddleware, updateProfile);          // Update profile
+
+router.get("/dashboard", authMiddleware, getStudentDashboard);
+
+router.get("/profile", authMiddleware, getMyProfile);
+
+router.put("/update-profile", authMiddleware, updateProfile);          
 
 export default router;
