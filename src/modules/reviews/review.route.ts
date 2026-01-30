@@ -1,4 +1,4 @@
-// src/modules/reviews/review.route.ts
+
 import { Router } from "express";
 import * as reviewController from "./review.controller";
 

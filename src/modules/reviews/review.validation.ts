@@ -1,8 +1,5 @@
 import { z } from "zod";
 
-// ===============================
-// Create Review Schema
-// ===============================
 export const createReviewSchema = z.object({
   body: z.object({
     studentId: z.string().uuid(),
@@ -12,9 +9,7 @@ export const createReviewSchema = z.object({
   }),
 });
 
-// ===============================
-// Update Review Schema
-// ===============================
+
 export const updateReviewSchema = z.object({
   body: z.object({
     rating: z.number().min(1).max(5).optional(),
@@ -22,9 +17,7 @@ export const updateReviewSchema = z.object({
   }),
 });
 
-// ===============================
-// Zod validation middleware
-// ===============================
+
 export const validate = (schema: any) => (req: any, res: any, next: any) => {
   try {
     schema.parse({ body: req.body, params: req.params, query: req.query });

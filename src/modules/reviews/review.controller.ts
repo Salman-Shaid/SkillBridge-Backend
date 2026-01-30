@@ -1,8 +1,8 @@
-// src/modules/reviews/review.controller.ts
+
 import { Request, Response } from "express";
 import * as reviewService from "./review.service";
 
-// Create review
+
 export const createReview = async (req: any, res: any) => {
   try {
     let { bookingId, rating, comment } = req.body;
@@ -21,7 +21,7 @@ export const createReview = async (req: any, res: any) => {
 
 
 
-// Get reviews by tutor
+
 export const getReviewsByTutor = async (req: Request, res: Response) => {
   try {
     let { tutorId } = req.params;
@@ -34,7 +34,7 @@ export const getReviewsByTutor = async (req: Request, res: Response) => {
   }
 };
 
-// Get reviews by student
+
 export const getReviewsByStudent = async (req: Request, res: Response) => {
   try {
     let { studentId } = req.params;
@@ -47,7 +47,7 @@ export const getReviewsByStudent = async (req: Request, res: Response) => {
   }
 };
 
-// Update review
+
 export const updateReview = async (req: Request, res: Response) => {
   try {
     let { id } = req.params;
@@ -64,7 +64,7 @@ export const updateReview = async (req: Request, res: Response) => {
   }
 };
 
-// Delete review
+
 export const deleteReview = async (req: Request, res: Response) => {
   try {
     let { id } = req.params;
