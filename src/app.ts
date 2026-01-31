@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "development") {
 
 
 app.get("/", (_req: Request, res: Response) => {
-  res.send("SkillBridge API Running ");
+  res.send("SkillBridge API Running 🚀");
 });
 
 app.get("/favicon.ico", (_req: Request, res: Response) => res.status(204).end());
@@ -36,6 +36,7 @@ app.use((_req: Request, _res: Response, next: NextFunction) => {
   next(error);
 });
 
+// Global Error Handler
 app.use(errorMiddleware);
 
 export default app;
