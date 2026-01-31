@@ -36,7 +36,7 @@ app.use((_req: Request, _res: Response, next: NextFunction) => {
   next(error);
 });
 
-// Global Error Handler
+
 app.use(errorMiddleware);
 
 export default app;

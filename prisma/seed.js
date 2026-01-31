@@ -29,7 +29,7 @@ async function main() {
             date: new Date("2026-02-01T10:00:00Z"),
         },
     });
-    console.log("✅ Seed complete");
+    console.log("Seed complete");
 }
 main()
     .catch((e) => {
